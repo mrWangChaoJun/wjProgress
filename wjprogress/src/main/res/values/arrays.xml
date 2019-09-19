@@ -4,6 +4,8 @@
     <declare-styleable name="WJProgress">
         <!--进度条宽度，默认10-->
         <attr name="wj_width" format="float"/>
+        <!--进度条进度-->
+        <attr name="wj_progressNumber" format="float"/>
         <!--进度条背景颜色，默认灰色-->
         <attr name="wj_backgroundColor" format="color"/>
         <!--进度条颜色，默认白色-->

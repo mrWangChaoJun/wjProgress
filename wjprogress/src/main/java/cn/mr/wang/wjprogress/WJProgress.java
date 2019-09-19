@@ -43,9 +43,9 @@ public class WJProgress extends View {
     //高
     private int height;
     //进度条进度,
-    private float progress = 1;
+    private float progress = 0;
     //当前进度
-    private float currentProgressNumber = 1;
+    private float currentProgressNumber = 0;
     //进度宽度
     private int progressWidth;
     //进度条外边距
@@ -121,6 +121,8 @@ public class WJProgress extends View {
             showPercent = typedArray.getBoolean(R.styleable.WJProgress_wj_showPercent, true);
             progressType = typedArray.getInteger(R.styleable.WJProgress_wj_progressType, CIRCULAR);
             textGravity = typedArray.getInteger(R.styleable.WJProgress_wj_textGravity, LEFT);
+            progress = typedArray.getFloat(R.styleable.WJProgress_wj_progressNumber, 0);
+            progressNumber = progress;
         }
     }
 
@@ -233,12 +235,13 @@ public class WJProgress extends View {
         canvas.drawLine(0, y, width, y, paint);
         //设置进度条颜色画笔
         setProgressPaint();
-        canvas.drawLine(0, y, width * progressNumber / 100, y, paint);
+
         //画原点
         if (isShowPoint) {
             paint.setColor(progressColor);
             canvas.drawCircle(width * progressNumber / 100, y, progressWidth / 2, paint);
         }
+        canvas.drawLine(0, y, width * progressNumber / 100, y, paint);
         //进度提示
         if (isShowTip) {
             setTextPaint();
@@ -272,12 +275,7 @@ public class WJProgress extends View {
         canvas.drawCircle((width / 2), (height / 2), ((width - progressWidth) / 2) - (progressWidth / 2), paint);
         //设置进度条颜色画笔
         setProgressPaint();
-        //画弧度
-        canvas.drawArc(progressWidth, progressWidth,
-                (width - progressWidth),
-                (height - progressWidth),
-                -90, progress,
-                false, paint);
+        float p = progress;
         //画原点
         if (isShowPoint) {
             float radian = (float) Math.toRadians(progress - 90);
@@ -285,7 +283,17 @@ public class WJProgress extends View {
             float y = (float) ((height / 2) + Math.sin(radian) * (width - progressWidth * 2) / 2);
             paint.setColor(progressColor);
             canvas.drawCircle(x, y, progressWidth / 2, paint);
+        } else {
+            if (progress == 0) {
+                p = 1;
+            }
         }
+        //画弧度
+        canvas.drawArc(progressWidth, progressWidth,
+                (width - progressWidth),
+                (height - progressWidth),
+                -90, p,
+                false, paint);
         //进度提示
         if (isShowTip) {
             setTextPaint();

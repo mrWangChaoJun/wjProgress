@@ -24,7 +24,30 @@
         app:wj_beforeTipText="已完成"
         app:wj_afterTipText="任务"
         app:wj_progressType="circular"
-        app:wj_textGravity="right"/>
+        app:wj_textGravity="right"
+        app:wj_progressNumber="10"/>
+
+    <cn.mr.wang.wjprogress.WJProgress
+        android:id="@+id/progress_straightLine"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/progress"
+        android:layout_marginTop="30dp"
+        app:wj_showPoint="false"
+        app:wj_width="15"
+        app:wj_color="@color/red"
+        app:wj_backgroundColor="@color/blue_light"
+        app:wj_showProgressText="true"
+        app:wj_progressTextColor="@color/black"
+        app:wj_progressTextSize="12"
+        app:wj_beforeTipText="已完成"
+        app:wj_afterTipText="任务"
+        app:wj_progressType="straightLine"
+        app:wj_textGravity="left"
+        app:wj_progressNumber="0"
+        />
     <Button
         android:id="@+id/add_btn"
         android:layout_width="match_parent"
@@ -32,7 +55,7 @@
         android:textSize="20dp"
         android:textColor="@color/black"
         android:text="增加进度"
-        app:layout_constraintTop_toBottomOf="@id/progress"
+        app:layout_constraintTop_toBottomOf="@id/progress_straightLine"
         android:layout_marginTop="30dp"/>
 
     <Button
