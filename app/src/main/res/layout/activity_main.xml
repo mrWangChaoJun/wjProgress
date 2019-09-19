@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <cn.mr.wang.wjprogress.WJProgress
+        android:id="@+id/progress"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="30dp"
+        app:wj_showPoint="false"
+        app:wj_width="15"
+        app:wj_color="@color/red"
+        app:wj_backgroundColor="@color/blue_light"
+        app:wj_showProgressText="true"
+        app:wj_progressTextColor="@color/black"
+        app:wj_progressTextSize="12"
+        app:wj_beforeTipText="已完成"
+        app:wj_afterTipText="任务"
+        app:wj_progressType="circular"
+        app:wj_textGravity="right"/>
+    <Button
+        android:id="@+id/add_btn"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:text="增加进度"
+        app:layout_constraintTop_toBottomOf="@id/progress"
+        android:layout_marginTop="30dp"/>
+
+    <Button
+        android:id="@+id/reset_btn"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        app:layout_constraintTop_toBottomOf="@id/add_btn"
+        android:layout_marginTop="15dp"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:text="重置"/>
+</android.support.constraint.ConstraintLayout>

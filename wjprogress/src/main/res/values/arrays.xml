@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--进度条属性-->
+    <declare-styleable name="WJProgress">
+        <!--进度条宽度，默认10-->
+        <attr name="wj_width" format="float"/>
+        <!--进度条背景颜色，默认灰色-->
+        <attr name="wj_backgroundColor" format="color"/>
+        <!--进度条颜色，默认白色-->
+        <attr name="wj_color" format="color"/>
+        <!--是否显示圆点，默认不显示-->
+        <attr name="wj_showPoint" format="boolean"/>
+        <!--是否在中间显示进度，默认不显示-->
+        <attr name="wj_showProgressText" format="boolean"/>
+        <!--进度提示字体的颜色，默认为黑色-->
+        <attr name="wj_progressTextColor" format="color"/>
+        <!--进度提示字体大小，默认14dp-->
+        <attr name="wj_progressTextSize" format="integer"/>
+        <!--前置提示文字-->
+        <attr name="wj_beforeTipText" format="string"/>
+        <!--后置提示文字-->
+        <attr name="wj_afterTipText" format="string"/>
+        <!--是否显示%-->
+        <attr name="wj_showPercent" format="boolean"/>
+        <!--进度条类型，默认圆形-->
+        <attr name="wj_progressType" format="enum">
+            <!--直线进度条-->
+            <enum name="straightLine" value="0"/>
+            <!--圆形进度条-->
+            <enum name="circular" value="1"/>
+        </attr>
+        <!--提示文字的位置，只有直线进度条的时候才会有效-->
+        <attr name="wj_textGravity" format="enum">
+            <!--进度条左边-->
+            <enum name="left" value="10"/>
+            <!--进度条中间，如果进度为0，在进度条正中间，进度条不为0，在进度的中间-->
+            <enum name="center" value="11"/>
+            <!--进度条中间，如果进度为0，在进度条右边，进度条不为0，在进度的右边-->
+            <enum name="right" value="12"/>
+            <!--在进度条上方显示，如果选top，设置layout_height的时候需要把文字的高度预留出来，否则提示文字会显示不全-->
+            <!--<enum name="top" value="13"/>-->
+        </attr>
+    </declare-styleable>
+
+</resources>

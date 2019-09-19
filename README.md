@@ -19,7 +19,7 @@
 安装教程
 =======
 点击 <https://jitpack.io/> 搜索 *mrWangChaoJun/wjprogress*  
-在build.gradle中加入以下代码  
+或者在build.gradle中加入以下代码  
 ```
 dependencies {  
     implementation 'com.github.mrWangChaoJun:wjprogress:1.0.0'  
