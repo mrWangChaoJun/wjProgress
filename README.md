@@ -43,13 +43,9 @@ dependencies {
 2、在java文件中使用
 
 ```
-WJProgress.setProgress(progressNumber);
+WJProgress.setProgress(progressNumber).startAnimation();
 ```
-也可以添加动画
 
-```
-WJProgress.startAnimation();
-```
 <br/>
 设置进度
 

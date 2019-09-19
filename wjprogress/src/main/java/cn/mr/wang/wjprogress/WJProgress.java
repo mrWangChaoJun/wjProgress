@@ -15,6 +15,11 @@ import android.view.View;
 
 import cn.shur.kidz.wjprogress.R;
 
+/**
+ * @ author LUCKY
+ * @ create date 2019/9/19 13:27
+ * 圆形/条形进度条
+ */
 public class WJProgress extends View {
     private static final String TAG = "WJProgress";
     //直线进度条
@@ -40,7 +45,7 @@ public class WJProgress extends View {
     //进度条进度,
     private float progress = 1;
     //当前进度
-    private float currentProgressNumber=1;
+    private float currentProgressNumber = 1;
     //进度宽度
     private int progressWidth;
     //进度条外边距
@@ -139,13 +144,13 @@ public class WJProgress extends View {
         Keyframe keyframe = Keyframe.ofFloat(0, getCurrentProgressNumber());
         Keyframe keyframe1 = Keyframe.ofFloat(0.5f, getProgress() + 1);
         Keyframe keyframe2 = Keyframe.ofFloat(1, getProgress());
-        PropertyValuesHolder propertyValuesHolder = PropertyValuesHolder.ofKeyframe("progress",keyframe, keyframe1, keyframe2);
+        PropertyValuesHolder propertyValuesHolder = PropertyValuesHolder.ofKeyframe("progress", keyframe, keyframe1, keyframe2);
         ObjectAnimator objectAnimator = ObjectAnimator.ofPropertyValuesHolder(this, propertyValuesHolder);
         objectAnimator.setDuration(1500);
         objectAnimator.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
-                currentProgressNumber=getProgress();
+                currentProgressNumber = getProgress();
             }
 
             @Override
@@ -178,6 +183,7 @@ public class WJProgress extends View {
 
     /**
      * 获取当前进度
+     *
      * @return
      */
     private float getCurrentProgressNumber() {
@@ -267,7 +273,7 @@ public class WJProgress extends View {
         //设置进度条颜色画笔
         setProgressPaint();
         //画弧度
-        canvas.drawArc(progressWidth,progressWidth,
+        canvas.drawArc(progressWidth, progressWidth,
                 (width - progressWidth),
                 (height - progressWidth),
                 -90, progress,
@@ -321,7 +327,7 @@ public class WJProgress extends View {
      * @return
      */
     private float getDy(int h) {
-        return h - (progressWidth * 2)-dip2px(1);
+        return h - (progressWidth * 2) - dip2px(1);
     }
 
     /**
