@@ -47,7 +47,6 @@
         app:wj_afterTipText="任务"
         app:wj_progressType="straightLine"
         app:wj_textGravity="left"
-        app:wj_progressNumber="0"
         />
     <Button
         android:id="@+id/add_btn"

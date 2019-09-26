@@ -15,6 +15,8 @@
 ![SdkVersion 28](https://img.shields.io/badge/SdkVersion-28-yellow)
 <br/>
 ![MinSdkVersion 16](https://img.shields.io/badge/MinSdkVersion-16-yellow)
+<br/>
+![img 1](https://github.com/mrWangChaoJun/images/blob/master/app/src/main/res/drawable/WechatIMG187.jpeg)
 
 安装教程
 =======
