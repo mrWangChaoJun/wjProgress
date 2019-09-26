@@ -1,4 +1,4 @@
-# WJRecyclerview
+# WJProgress
 
 
 控件名称
@@ -18,8 +18,15 @@
 
 安装教程
 =======
-点击 <https://jitpack.io/> 搜索 *mrWangChaoJun/wjprogress*  
-或者在build.gradle中加入以下代码  
+在项目根目录的build.gradle中加入以下代码 
+```
+allprojects {
+    repositories {
+	maven { url 'https://jitpack.io' }
+	}
+}
+```
+在build.gradle中加入以下代码  
 ```
 dependencies {  
     implementation 'com.github.mrWangChaoJun:wjprogress:1.0.0'  
