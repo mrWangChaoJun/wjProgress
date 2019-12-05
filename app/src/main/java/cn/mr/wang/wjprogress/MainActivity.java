@@ -2,10 +2,12 @@ package cn.mr.wang.wjprogress;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
+    String TAG = "MainActivity";
     private float progressNumber = 0;
     private float progressStraightLineNumber = 0;
     @Override
@@ -22,8 +24,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 progressNumber += 10;
+                Log.e(TAG, "onClick:progressNumber---> "+progressNumber);
                 wjProgress.setProgress(progressNumber).startAnimation();
                 progressStraightLineNumber+=10;
+                Log.e(TAG, "onClick:progressStraightLineNumber---> "+progressStraightLineNumber);
                 progress_straightLine.setProgress(progressStraightLineNumber).startAnimation();
             }
         });

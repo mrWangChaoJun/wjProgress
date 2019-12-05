@@ -15,7 +15,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="30dp"
-        app:wj_showPoint="false"
+        app:wj_showPoint="true"
         app:wj_width="15"
         app:wj_color="@color/red"
         app:wj_backgroundColor="@color/blue_light"
@@ -26,18 +26,20 @@
         app:wj_afterTipText="任务"
         app:wj_progressType="circular"
         app:wj_textGravity="right"
-        app:wj_progressNumber="10"/>
+        app:wj_progressNumber="900"/>
 
     <cn.mr.wang.wjprogress.WJProgress
         android:id="@+id/progress_straightLine"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="100dp"
+        android:layout_margin="15dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/progress"
         android:layout_marginTop="30dp"
-        app:wj_showPoint="false"
-        app:wj_width="15"
+        app:wj_showPoint="true"
+        app:wj_width="25"
+        app:wj_progressNumber="10"
         app:wj_color="@color/red"
         app:wj_backgroundColor="@color/blue_light"
         app:wj_showProgressText="true"

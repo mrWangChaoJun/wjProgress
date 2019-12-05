@@ -42,6 +42,15 @@
             <!--在进度条上方显示，如果选top，设置layout_height的时候需要把文字的高度预留出来，否则提示文字会显示不全-->
             <!--<enum name="top" value="13"/>-->
         </attr>
+        <!--画笔形状-->
+        <attr name="wj_paint_cap" format="enum">
+            <!--圆头-->
+            <enum name="round" value="20"/>
+            <!--平头-->
+            <enum name="butt" value="21"/>
+            <!--方头-->
+            <enum name="square" value="22"/>
+        </attr>
     </declare-styleable>
 
 </resources>

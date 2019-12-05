@@ -22,6 +22,8 @@ import cn.shur.kidz.wjprogress.R;
  */
 public class WJProgress extends View {
     private static final String TAG = "WJProgress";
+    private float maxProgress = 100f;
+    private float minProgress = 0f;
     //直线进度条
     public static final int STRAIGHT_LINE = 0;
     //圆形进度条
@@ -87,6 +89,17 @@ public class WJProgress extends View {
     private boolean showPercent = true;
     //进度条的类型,默认圆形
     private int progressType = CIRCULAR;
+    //直线进度条，画笔形状为圆形，需要将宽度进行缩减，宽度的缩减率
+    private float indentation = 0.6f;
+    //画笔的形状
+    //圆头
+    private static final int ROUND = 20;
+    //平头
+    private static final int BUTT = 21;
+    //方头
+    private static final int SQUARE = 22;
+    //画笔默认形状圆头
+    private int defaultPaintCap = ROUND;
 
 
     public WJProgress(Context context, AttributeSet attrs) {
@@ -101,6 +114,7 @@ public class WJProgress extends View {
     private void initView(Context context, AttributeSet attrs) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.WJProgress);
         if (typedArray != null) {
+            defaultPaintCap = typedArray.getInteger(R.styleable.WJProgress_wj_paint_cap, ROUND);
             float pWidth = typedArray.getFloat(R.styleable.WJProgress_wj_width, dip2px(10));
             progressWidth = (int) pWidth;
             progressTipColor = typedArray.getColor(R.styleable.WJProgress_wj_progressTextColor, Color.parseColor("#000000"));
@@ -121,9 +135,28 @@ public class WJProgress extends View {
             showPercent = typedArray.getBoolean(R.styleable.WJProgress_wj_showPercent, true);
             progressType = typedArray.getInteger(R.styleable.WJProgress_wj_progressType, CIRCULAR);
             textGravity = typedArray.getInteger(R.styleable.WJProgress_wj_textGravity, LEFT);
-            progress = typedArray.getFloat(R.styleable.WJProgress_wj_progressNumber, 0);
-            progressNumber = progress;
+            float p = typedArray.getFloat(R.styleable.WJProgress_wj_progressNumber, 0);
+            p = p >= maxProgress ? maxProgress : p < minProgress ? minProgress : p;
+            progress = 360 * p / 100;
+            progressNumber = p;
         }
+    }
+
+    /**
+     * 获取画笔的形状，默认是圆头
+     *
+     * @return Paint.Cap
+     */
+    private Paint.Cap getDefaultCap() {
+        Paint.Cap cap;
+        if (defaultPaintCap == BUTT) {
+            cap = defaultCapButt;
+        } else if (defaultPaintCap == SQUARE) {
+            cap = defaultCapSquare;
+        } else {
+            cap = defaultCap;
+        }
+        return cap;
     }
 
     /**
@@ -132,7 +165,7 @@ public class WJProgress extends View {
      * @param p 进度
      */
     public WJProgress setProgress(float p) {
-        p = p >= 100 ? 100 : p;
+        p = p >= maxProgress ? maxProgress : p < minProgress ? minProgress : p;
         progressNumber = p;
         progress = 360 * p / 100;
         invalidate();
@@ -217,31 +250,42 @@ public class WJProgress extends View {
      */
     @SuppressLint("NewApi")
     private void drawStraightLineProgress(Canvas canvas) {
-//        Log.e(TAG, "drawStraightLineProgress" );
+        progressNumber = progressNumber >= maxProgress ? maxProgress : progressNumber;
         //获取宽度
         width = getWidth();
         //获取高度
         height = getHeight();
         //设置进度条背景色画笔
         setProgressBackgroundPaint();
-        int y;
-        if (isShowPoint) {
-            y = (height - progressWidth - (progressWidth / 2));
+        int startY = (height / 2);
+
+        //如果是圆头，宽度进行缩减
+        if (defaultPaintCap == ROUND) {
+            int progressStartX = (int) (progressWidth * indentation);
+            canvas.drawLine(progressStartX, startY, width - progressStartX, startY, paint);
         } else {
-            y = (height - progressWidth + 7);
+            canvas.drawLine(0, startY, width, startY, paint);
         }
-        //drawLine(float startX, float startY, float stopX, float stopY, Paint paint),
-        // startX, startY, stopX, stopY 分别是线的起点和终点坐标。
-        canvas.drawLine(0, y, width, y, paint);
+
         //设置进度条颜色画笔
         setProgressPaint();
 
+        float progressn = progressNumber == 0 ? 1 : progressNumber;
         //画原点
         if (isShowPoint) {
             paint.setColor(progressColor);
-            canvas.drawCircle(width * progressNumber / 100, y, progressWidth / 2, paint);
+            int progressStartX = (int) ((width * progressn / 100) + (progressWidth * indentation) + progressWidth / 4);
+            canvas.drawCircle((width * progressn / 100) >= progressWidth ? (width * progressn / 100) >= width ? progressStartX - progressWidth * 2 : progressStartX - progressWidth : progressStartX, (height / 2), progressWidth / 2, paint);
         }
-        canvas.drawLine(0, y, width * progressNumber / 100, y, paint);
+
+        if (defaultPaintCap == ROUND) {
+            int progressStartX = (int) (progressWidth * indentation);
+            int progressEndX = (int) (width * progressn / 100 - progressStartX);
+            canvas.drawLine(progressStartX, startY, progressEndX <= 0 ? progressStartX : progressEndX, startY, paint);
+        } else {
+            canvas.drawLine(0, startY, width * progressn / 100, startY, paint);
+        }
+
         //进度提示
         if (isShowTip) {
             setTextPaint();
@@ -347,9 +391,11 @@ public class WJProgress extends View {
         //线条的宽度
         paint.setStrokeWidth(progressWidth);
         //线条的形状
-        paint.setStrokeCap(defaultCap);
+        paint.setStrokeCap(getDefaultCap());
         //线条颜色
         paint.setColor(progressBackgroundColor);
+        //抗锯齿
+        paint.setAntiAlias(true);
     }
 
     /**
